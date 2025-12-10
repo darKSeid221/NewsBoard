@@ -1,4 +1,4 @@
-# NewsBoard - News Article App 💊
+# NewsBoard - News Article App
 2. Open in Android Studio
 3. Sync Gradle
 4. Run app
