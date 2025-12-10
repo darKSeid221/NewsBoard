@@ -1,6 +1,6 @@
 # NewsBoard - News Article App
 
-Android App to show list of news article , detail article , can be bookmarked and share.
+Offline First Android App to show list of news article , detail article , article can be bookmarked and share.
 
 <img width="200" height="400" alt="Screenshot 2025-12-10 at 12 45 19 PM" src="https://github.com/user-attachments/assets/1faccb66-1e5c-4e3e-930f-88db4656629c" />
 
