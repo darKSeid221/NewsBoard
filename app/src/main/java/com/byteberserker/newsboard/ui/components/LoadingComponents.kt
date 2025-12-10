@@ -8,6 +8,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.height
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -29,5 +30,16 @@ fun ListItemLoading() {
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
+    }
+}
+@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Composable
+fun LoadingPreview() {
+    androidx.compose.material.MaterialTheme {
+        androidx.compose.foundation.layout.Column {
+            FullScreenLoading()
+            androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(16.dp))
+            ListItemLoading()
+        }
     }
 }

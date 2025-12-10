@@ -23,7 +23,20 @@ fun BookmarkScreen(
     onOpenArticle: (Article) -> Unit
 ) {
     val bookmarks by viewModel.bookmarks.collectAsState()
+    
+    BookmarkContent(
+        bookmarks = bookmarks,
+        onOpenArticle = onOpenArticle,
+        onRemoveBookmark = { viewModel.removeBookmark(it) }
+    )
+}
 
+@Composable
+fun BookmarkContent(
+    bookmarks: List<Article>,
+    onOpenArticle: (Article) -> Unit,
+    onRemoveBookmark: (Article) -> Unit
+) {
     if (bookmarks.isEmpty()) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text("No bookmarks yet", style = MaterialTheme.typography.h6)
@@ -37,10 +50,32 @@ fun BookmarkScreen(
                 ArticleCard(
                     article = article,
                     onClick = { onOpenArticle(article) },
-                    onBookmark = { viewModel.removeBookmark(article) },
+                    onBookmark = { onRemoveBookmark(article) },
                     isBookmarked = true 
                 )
             }
         }
+    }
+}
+
+@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Composable
+fun BookmarkScreenPreview() {
+    MaterialTheme {
+        BookmarkContent(
+            bookmarks = listOf(
+                com.byteberserker.newsboard.domain.Article(
+                     url = "https://example.com/1",
+                     title = "Bookmarked Article 1",
+                     description = "Description 1",
+                     content = "Content",
+                     imageUrl = null,
+                     sourceName = "Source 1",
+                     publishedAt = "2024-01-01"
+                 )
+            ),
+            onOpenArticle = {},
+            onRemoveBookmark = {}
+        )
     }
 }

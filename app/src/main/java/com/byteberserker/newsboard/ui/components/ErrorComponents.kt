@@ -57,3 +57,14 @@ fun InlineError(
         }
     }
 }
+@androidx.compose.ui.tooling.preview.Preview(showBackground = true)
+@Composable
+fun ErrorPreview() {
+    MaterialTheme {
+        Column {
+            FullScreenError(message = "Something went wrong", onRetry = {})
+            Spacer(modifier = Modifier.height(16.dp))
+            InlineError(message = "Network error", onRetry = {})
+        }
+    }
+}
