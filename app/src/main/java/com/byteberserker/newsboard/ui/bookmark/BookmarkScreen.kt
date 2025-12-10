@@ -46,7 +46,10 @@ fun BookmarkContent(
             contentPadding = PaddingValues(16.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            items(bookmarks) { article ->
+            items(
+                items = bookmarks,
+                key = { it.url }
+            ) { article ->
                 ArticleCard(
                     article = article,
                     onClick = { onOpenArticle(article) },

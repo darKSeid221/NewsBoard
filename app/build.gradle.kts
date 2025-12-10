@@ -81,7 +81,8 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.common)
     implementation(libs.androidx.paging.compose)
-    implementation(libs.glide.core)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.coil.compose)
     implementation(platform(libs.compose.bom))
 
     implementation(libs.compose.ui)
@@ -101,7 +102,6 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     androidTestImplementation(platform(libs.compose.bom))
-    kapt(libs.glide.compiler)
     testImplementation(libs.junit)
     testImplementation(libs.mockwebserver)
     testImplementation(libs.mockk)

@@ -27,9 +27,10 @@ class NewsRepositoryImpl @Inject constructor(
         val searchQuery = query ?: ""
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 30,
                 enablePlaceholders = false,
-                initialLoadSize = 20
+                initialLoadSize = 30,
+                prefetchDistance = 20
             ),
             remoteMediator = ArticleRemoteMediator(
                 query = searchQuery,

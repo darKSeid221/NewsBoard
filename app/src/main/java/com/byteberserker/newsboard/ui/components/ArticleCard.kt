@@ -16,8 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import com.bumptech.glide.Glide
+import androidx.compose.ui.unit.dp
 import com.byteberserker.newsboard.domain.Article
 
 @Composable
@@ -36,17 +35,13 @@ fun ArticleCard(
     ) {
         Column {
             if (!article.imageUrl.isNullOrEmpty()) {
-                AndroidView(
-                    factory = { ctx ->
-                        ImageView(ctx).apply {
-                            scaleType = android.widget.ImageView.ScaleType.CENTER_CROP
-                        }
-                    },
-                    update = { view ->
-                        Glide.with(view.context)
-                            .load(article.imageUrl)
-                            .into(view)
-                    },
+                coil.compose.AsyncImage(
+                    model = coil.request.ImageRequest.Builder(androidx.compose.ui.platform.LocalContext.current)
+                        .data(article.imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = androidx.compose.ui.layout.ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)

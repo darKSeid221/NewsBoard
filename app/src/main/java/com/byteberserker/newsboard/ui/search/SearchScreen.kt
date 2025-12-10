@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 import com.byteberserker.newsboard.domain.Article
 import com.byteberserker.newsboard.ui.FeedViewModel
 import com.byteberserker.newsboard.ui.components.ArticleCard
@@ -72,7 +73,10 @@ fun SearchContent(
             SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing =
             lazyPagingItems.loadState.refresh is LoadState.Loading), onRefresh = onRefresh) {
                 LazyColumn {
-                    items(lazyPagingItems.itemCount) { index ->
+                    items(
+                        count = lazyPagingItems.itemCount,
+                        key = lazyPagingItems.itemKey { it.url }
+                    ) { index ->
                         val article = lazyPagingItems[index]
                         article?.let {
                             val isBookmarked = bookmarkedUrls.contains(it.url)

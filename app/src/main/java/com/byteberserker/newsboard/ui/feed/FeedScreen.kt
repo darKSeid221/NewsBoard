@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 // Paging Compose
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
 
 // Hilt ViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -61,7 +62,10 @@ fun FeedContent(
             SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing =
             lazyPagingItems.loadState.refresh is LoadState.Loading), onRefresh = onRefresh) {
                 LazyColumn {
-                    items(lazyPagingItems.itemCount) { index ->
+                    items(
+                        count = lazyPagingItems.itemCount,
+                        key = lazyPagingItems.itemKey { it.url }
+                    ) { index ->
                         val article = lazyPagingItems[index]
                         article?.let {
                             val isBookmarked = bookmarkedUrls.contains(it.url)

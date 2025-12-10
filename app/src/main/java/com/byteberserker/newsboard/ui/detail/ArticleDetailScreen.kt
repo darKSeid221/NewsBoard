@@ -2,7 +2,6 @@ package com.byteberserker.newsboard.ui.detail
 
 import android.view.ViewGroup
 import android.webkit.WebView
-import android.widget.ImageView
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.bumptech.glide.Glide
 import com.byteberserker.newsboard.domain.Article
 
 @Composable
@@ -78,17 +76,13 @@ fun ArticleDetailScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 article.imageUrl?.let { imageUrl ->
-                    AndroidView(
-                        factory = { ctx ->
-                            ImageView(ctx).apply {
-                                scaleType = android.widget.ImageView.ScaleType.CENTER_CROP
-                            }
-                        },
-                        update = { view ->
-                            Glide.with(view.context)
-                                .load(imageUrl)
-                                .into(view)
-                        },
+                    coil.compose.AsyncImage(
+                        model = coil.request.ImageRequest.Builder(androidx.compose.ui.platform.LocalContext.current)
+                            .data(imageUrl)
+                            .crossfade(true)
+                            .build(),
+                        contentDescription = null,
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(250.dp)

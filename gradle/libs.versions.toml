@@ -28,6 +28,7 @@ activity-compose = "1.9.0"
 accompanist = "0.34.0"
 ksp = "1.9.24-1.0.20"
 splashscreen = "1.0.1"
+coil = "2.6.0"
 
 
 [libraries]
@@ -89,6 +90,7 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 compose-material = { group = "androidx.compose.material", name = "material" }
 accompanist-swiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "accompanist" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Testing
 mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }

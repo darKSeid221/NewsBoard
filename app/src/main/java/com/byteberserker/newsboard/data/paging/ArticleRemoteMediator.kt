@@ -30,7 +30,13 @@ class ArticleRemoteMediator(
                 LoadType.REFRESH -> 1
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    return MediatorResult.Success(endOfPaginationReached = true)
+                    val lastItem = state.lastItemOrNull()
+                    if (lastItem == null) {
+                        return MediatorResult.Success(endOfPaginationReached = true)
+                    }
+                    val itemsCount = state.pages.sumOf { it.data.size }
+                    val page = kotlin.math.ceil(itemsCount.toDouble() / state.config.pageSize).toInt() + 1
+                    page
                 }
             }
 
