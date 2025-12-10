@@ -27,6 +27,7 @@ material3 = "1.2.1"
 activity-compose = "1.9.0"
 accompanist = "0.34.0"
 ksp = "1.9.24-1.0.20"
+splashscreen = "1.0.1"
 
 
 [libraries]
@@ -70,6 +71,7 @@ androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationFragmentKtx" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 
 # Core Compose libraries (versions via BOM)
@@ -86,6 +88,13 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-material = { group = "androidx.compose.material", name = "material" }
 accompanist-swiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "accompanist" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+
+# Testing
+mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
+mockk = { group = "io.mockk", name = "mockk", version = "1.13.10" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version = "1.8.0" } # Match project's coroutines version if possible, typically bundled
+turbine = { group = "app.cash.turbine", name = "turbine", version = "1.1.0" }
 
 
 

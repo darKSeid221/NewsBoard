@@ -7,11 +7,11 @@ plugins {
 
 
 android {
-    namespace = "com.robustrade.newsboard"
+    namespace = "com.byteberserker.newsboard"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.robustrade.newsboard"
+        applicationId = "com.byteberserker.newsboard"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -48,7 +48,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14" // Matches Kotlin 1.9.24
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     android.buildFeatures.buildConfig = true
 }
@@ -72,10 +72,12 @@ dependencies {
     implementation(libs.lifecycle.common)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.common)
     implementation(libs.androidx.paging.compose)
@@ -90,6 +92,8 @@ dependencies {
     implementation(libs.accompanist.swiperefresh)
     implementation(libs.activity.compose)
 
+    implementation(libs.androidx.core.splashscreen)
+
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.ui.test.manifest)
 
@@ -99,6 +103,10 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     kapt(libs.glide.compiler)
     testImplementation(libs.junit)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
