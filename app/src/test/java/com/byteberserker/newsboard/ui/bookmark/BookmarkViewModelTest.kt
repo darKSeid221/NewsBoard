@@ -1,6 +1,6 @@
 package com.byteberserker.newsboard.ui.bookmark
 
-import com.byteberserker.newsboard.data.repository.BookmarkRepository
+import com.byteberserker.newsboard.domain.repository.BookmarkRepository
 import com.byteberserker.newsboard.domain.Article
 import io.mockk.coEvery
 import io.mockk.coVerify

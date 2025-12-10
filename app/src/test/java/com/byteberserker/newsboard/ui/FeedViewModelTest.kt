@@ -3,6 +3,7 @@ package com.byteberserker.newsboard.ui
 import androidx.paging.PagingData
 import com.byteberserker.newsboard.domain.Article
 import com.byteberserker.newsboard.domain.repository.NewsRepository
+import com.byteberserker.newsboard.domain.repository.BookmarkRepository
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,7 @@ import org.junit.Test
 class FeedViewModelTest {
 
     private lateinit var repository: NewsRepository
+    private lateinit var bookmarkRepository: BookmarkRepository
     private lateinit var viewModel: FeedViewModel
     private val testDispatcher = UnconfinedTestDispatcher()
 
@@ -25,7 +27,8 @@ class FeedViewModelTest {
     fun setup() {
         Dispatchers.setMain(testDispatcher)
         repository = mockk()
-        every { repository.observeBookmarks() } returns flowOf(emptyList())
+        bookmarkRepository = mockk()
+        every { bookmarkRepository.getAllBookmarks() } returns flowOf(emptyList())
     }
 
     @After
@@ -37,7 +40,7 @@ class FeedViewModelTest {
     fun `articles flow is initialized from repository`() = runTest {
         val pagingData = PagingData.empty<Article>()
         every { repository.streamTopHeadlines() } returns flowOf(pagingData)
-        viewModel = FeedViewModel(repository)
+        viewModel = FeedViewModel(repository, bookmarkRepository)
         assertNotNull(viewModel.feed)
     }
 }

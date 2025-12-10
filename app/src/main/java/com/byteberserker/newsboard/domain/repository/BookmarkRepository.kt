@@ -1,4 +1,4 @@
-package com.byteberserker.newsboard.data.repository
+package com.byteberserker.newsboard.domain.repository
 
 import com.byteberserker.newsboard.domain.Article
 import kotlinx.coroutines.flow.Flow

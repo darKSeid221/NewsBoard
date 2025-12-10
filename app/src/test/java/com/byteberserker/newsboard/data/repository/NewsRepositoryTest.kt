@@ -23,33 +23,16 @@ class NewsRepositoryTest {
     fun setup() {
         newsApi = mockk()
         articleDao = mockk(relaxed = true)
-        bookmarkDao = mockk(relaxed = true)
         database = mockk(relaxed = true)
         
         every { database.articleDao() } returns articleDao
-        every { database.bookmarkDao() } returns bookmarkDao
 
-        repository = NewsRepositoryImpl(newsApi, bookmarkDao, database, articleDao)
+        repository = NewsRepositoryImpl(newsApi, database, articleDao)
     }
 
     @Test
     fun `streamTopHeadlines returns flow of PagingData`() = runTest {
         val result = repository.streamTopHeadlines()
         assertNotNull(result)
-    }
-    
-    @Test
-    fun `removeBookmark calls dao delete`() = runTest {
-        val article = Article(
-            url = "https://example.com",
-            title = "Test",
-            description = "Desc",
-            content = "Content",
-            imageUrl = null,
-            sourceName = "Source",
-            publishedAt = "Date"
-        )
-        repository.unbookmarkArticle(article)
-        coVerify { bookmarkDao.delete(any()) }
     }
 }

@@ -87,8 +87,7 @@ object NetworkModule {
     @Singleton
     fun provideNewsRepository(
         api: NewsApiService,
-        bookmarkDao: BookmarkDao,
         database: AppDatabase,
         articleDao: com.byteberserker.newsboard.data.local.ArticleDao
-    ): NewsRepository = NewsRepositoryImpl(api, bookmarkDao, database, articleDao)
+    ): NewsRepository = NewsRepositoryImpl(api, database, articleDao)
 }

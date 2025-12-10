@@ -1,6 +1,6 @@
 package com.byteberserker.newsboard.di
 
-import com.byteberserker.newsboard.data.repository.BookmarkRepository
+import com.byteberserker.newsboard.domain.repository.BookmarkRepository
 import com.byteberserker.newsboard.data.repository.BookmarkRepositoryImpl
 import dagger.Binds
 import dagger.Module

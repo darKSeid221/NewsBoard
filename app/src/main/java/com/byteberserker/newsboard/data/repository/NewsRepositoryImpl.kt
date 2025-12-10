@@ -6,10 +6,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.byteberserker.newsboard.data.local.ArticleDao
-import com.byteberserker.newsboard.data.local.BookmarkDao
 import com.byteberserker.newsboard.data.local.db.AppDatabase
 import com.byteberserker.newsboard.data.mapper.toArticle
-import com.byteberserker.newsboard.data.mapper.toBookmarkEntity
 import com.byteberserker.newsboard.data.paging.ArticleRemoteMediator
 import com.byteberserker.newsboard.data.remote.NewsApiService
 import com.byteberserker.newsboard.domain.Article
@@ -21,7 +19,6 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class NewsRepositoryImpl @Inject constructor(
     private val api: NewsApiService,
-    private val bookmarkDao: BookmarkDao,
     private val database: AppDatabase,
     private val articleDao: ArticleDao
 ) : NewsRepository {
@@ -45,18 +42,4 @@ class NewsRepositoryImpl @Inject constructor(
             pagingData.map { it.toArticle() }
         }
     }
-
-    override suspend fun bookmarkArticle(article: Article) =
-        bookmarkDao.insert(article.toBookmarkEntity())
-
-    override suspend fun unbookmarkArticle(article: Article) =
-        bookmarkDao.delete(article.toBookmarkEntity())
-
-    override fun observeBookmarks(): Flow<List<Article>> =
-        bookmarkDao.getAllBookmarks().map { entities ->
-            entities.map { it.toArticle() }
-        }
-
-    override suspend fun isBookmarked(url: String): Boolean =
-        bookmarkDao.isBookmarked(url)
 }

@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.byteberserker.newsboard.domain.Article
 import com.byteberserker.newsboard.domain.repository.NewsRepository
+import com.byteberserker.newsboard.domain.repository.BookmarkRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +21,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FeedViewModel @Inject constructor(private val repo: NewsRepository) : ViewModel() {
+class FeedViewModel @Inject constructor(
+    private val repo: NewsRepository,
+    private val bookmarkRepo: BookmarkRepository
+) : ViewModel() {
     private val _query = MutableStateFlow<String?>(null)
 
     fun setQuery(q: String?) {
@@ -34,16 +38,16 @@ class FeedViewModel @Inject constructor(private val repo: NewsRepository) : View
         .cachedIn(viewModelScope)
         .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
 
-    val bookmarkedUrls: StateFlow<Set<String>> = repo.observeBookmarks()
+    val bookmarkedUrls: StateFlow<Set<String>> = bookmarkRepo.getAllBookmarks()
         .map { list -> list.map { it.url }.toSet() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 
     fun bookmarkArticle(article: Article) {
         viewModelScope.launch {
-            if (repo.isBookmarked(article.url)) {
-                repo.unbookmarkArticle(article)
+            if (bookmarkRepo.isBookmarked(article.url)) {
+                bookmarkRepo.removeBookmark(article)
             } else {
-                repo.bookmarkArticle(article)
+                bookmarkRepo.saveBookmark(article)
             }
         }
     }

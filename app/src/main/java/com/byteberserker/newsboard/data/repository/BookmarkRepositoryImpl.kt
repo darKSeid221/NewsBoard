@@ -2,6 +2,7 @@ package com.byteberserker.newsboard.data.repository
 
 import com.byteberserker.newsboard.data.local.BookmarkDao
 import com.byteberserker.newsboard.domain.Article
+import com.byteberserker.newsboard.domain.repository.BookmarkRepository
 import com.byteberserker.newsboard.data.mapper.toArticle
 import com.byteberserker.newsboard.data.mapper.toBookmarkEntity
 import kotlinx.coroutines.flow.Flow

@@ -2,7 +2,7 @@ package com.byteberserker.newsboard.ui.bookmark
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.byteberserker.newsboard.data.repository.BookmarkRepository
+import com.byteberserker.newsboard.domain.repository.BookmarkRepository
 import com.byteberserker.newsboard.domain.Article
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
